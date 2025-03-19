@@ -64,20 +64,21 @@ class db {
   static async select(column, where = "") {
     try {
       await db.connect();
-      const sql = `select ${column} from tbl_user`;
-      if (where) sql += `where ${where}`;
+      let sql = `select ${column} from tbl_user tu`;
+      if (where) sql += ` where ${where}`;
+      console.log("🚀 ~ db ~ select ~ sql", sql);
       const result = db.connection.query(sql);
       return result;
     } catch (error) {
       console.log("🚀 ~ db ~ connect ~ error:", error);
     }
   }
-  static async update(id, column, value) {
+  static async update(id, username, password, time) {
     try {
       await db.connect();
-      const sql = `UPDATE tbl_user t
-                    SET ${column} = ${value}
-                    WHERE t.Id = ${id}`;
+      const sql = `update tbl_user tu
+                    set tu.Username = '${username}', tu.Password = '${password}', tu.CreateTime = '${time}'
+                    where tu.Id = ${id}`;
       const result = (await db.connection).query(sql);
       return result;
     } catch (error) {
@@ -99,11 +100,11 @@ class db {
 
 export default db;
 
-(async () => {
-  //   await db.insert(["Fauzhan", "1234", new Date()]);
-  //   const result = await db.select("*");
-  //   const result = await db.delete("1");
+// (async () => {
+//   await db.insert(["Fauzhan", "1234", new Date()]);
+//   const result = await db.select("*");
+//   const result = await db.delete("1");
 
-  console.log(result);
-  return;
-})();
+//   console.log(result);
+//   return;
+// })();
