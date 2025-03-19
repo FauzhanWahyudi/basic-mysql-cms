@@ -1,5 +1,6 @@
+import { config } from "dotenv";
+config();
 import "./globals.css";
-
 export const metadata = {
   title: "Fauzhan Wahyudi Phiraka Answare",
   description: "Created by Fauzhan",
